@@ -1,0 +1,31 @@
+#define F_CPU 8000000L
+#include avrio.h
+#include avrsfr_defs.h
+#include utildelay.h
+
+int main(void)
+{
+     Replace with your application code 
+	DDRD = 1PIND4;
+	DDRD &= ~(1PIND0);
+	DDRD &= ~(1PIND1);
+	DDRD &= ~(1PIND2);
+	DDRD &= ~(1PIND3);
+	
+	A + B sem o C - risco, qualquer combinação q envolva.
+	C + D sem o A - risco, qualquer comb
+	
+	0011, 0111, 1100, 1101
+    while (1) 
+    {
+		if(( PIND&(1PIND0) && PIND&(1PIND1) && !(PIND&(1PIND2))) 
+		   ( PIND&(1PIND2) && PIND&(1PIND3) && !(PIND&(1PIND0)))){
+			PORTD = 1PIND4;
+			
+		}
+		else{
+			PORTD &= ~(1PIND4);
+			
+		}
+    }
+}

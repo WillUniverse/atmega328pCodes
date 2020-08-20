@@ -1,0 +1,45 @@
+/*
+ * pedro.c
+ *
+ * Created: 22/05/2019 12:47:59
+ * Author : Labcom1
+ */ 
+#define F_CPU 8000000L
+#include <avr/io.h>
+#include <util/delay.h>
+
+
+int main(void)
+{
+	DDRC |= 1<<PINC5; //verde
+	DDRC |= 1<<PINC4; //amarelo
+	DDRB |= 1<<PINB1; //vermelho
+	
+	DDRB &= ~(1<<PINB0); //bot1
+	DDRD &= ~(PIND0); //bot2
+    while (1) 
+    {
+		if( (PINB&(1<<PINB0)) == 1 && (PIND&(1<<PIND0)) == 0){
+			PORTC &= ~(1<<PINC5); //verde OFF
+			PORTC |= 1<<PINC4; //amarelo ON
+			PORTB &= ~(1<<PINB1); //vermelho OFF
+		}
+		else if( (PINB&(1<<PINB0)) == 1 && (PIND&(1<<PIND0)) == 1){
+			PORTC |= 1<<PINC5; //verde ON
+			PORTC &= ~(1<<PINC4); //amarelo OF
+			PORTB &= ~(1<<PINB1); //vermelho OFF
+		}
+		else if( (PINB&(1<<PINB0)) == 0 && (PIND&(1<<PIND0)) == 1){
+			PORTC ^= 1<<PINC5; //verde delay
+			PORTC ^= 1<<PINC4; //amarelo delay
+			PORTB ^= 1<<PINB1; //vermelho delay
+			_delay_ms(100);
+		}
+		else{
+			PORTC &= ~(1<<PINC5); //verde OFF
+			PORTC &= ~(1<<PINC4); //amarelo OFF
+			PORTB |= 1<<PINB1; //vermelho ON
+		}
+    }
+}
+
